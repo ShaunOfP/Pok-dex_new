@@ -1,36 +1,40 @@
 import { Component, OnInit } from '@angular/core';
+import { PokeapiService } from '../pokeapi.service';
+import { HttpClientModule } from '@angular/common/http';
+import { CardComponent } from './components/card/card.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [],
+  imports: [HttpClientModule, CardComponent, CommonModule],
+  providers: [PokeapiService],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
 })
 
 export class MainComponent implements OnInit {
-  pokeInfo: Object[] = [];
+  pokeInfoList: any;
+  pokeNameList: string[] = [];
 
-  constructor() {
-
+  constructor(private pokeapiService: PokeapiService) {
   }
 
   ngOnInit() {
-    this.fetchData();
-    this.showData();
+    this.pokeapiService.getPokemonList().subscribe({
+      next: (data) => {
+        this.pokeInfoList = data['results'];
+        this.fillPokeNameList();
+      },
+      error: (error) => {
+        console.error('There was an error!', error);
+      }
+    });
   }
 
-  async fetchData() {
-    try {
-      const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=10000&offset=0`);
-      const data = await response.json();
-      this.pokeInfo.push(data);
-    } catch (e) {
-      console.log('There was a problem fetching the data: ', e);
+  fillPokeNameList() {
+    for (let i = 0; i < this.pokeInfoList.length; i++) {
+      this.pokeNameList.push(this.pokeInfoList[i]['name']);
     }
-  }
-
-  showData() {
-    console.log(this.pokeInfo[0]);
   }
 }

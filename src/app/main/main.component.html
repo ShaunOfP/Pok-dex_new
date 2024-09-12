@@ -1,8 +1,6 @@
 <section>
-    <h1>Pokedex</h1>
+    <h1>Pokédex</h1>
     <div id="cardContainer">
-        <!-- @for (pokemon in pokeInfo; track id){
-
-        } -->
+        <app-card *ngFor="let pokemon of pokeNameList" [pokeName]="pokemon"></app-card>
     </div>
 </section>
