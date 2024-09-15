@@ -14,27 +14,32 @@ import { CommonModule } from '@angular/common';
 })
 
 export class MainComponent implements OnInit {
-  pokeInfoList: any;
   pokeNameList: string[] = [];
+  fullPokemonInfoList: object[] = [];
 
   constructor(private pokeapiService: PokeapiService) {
   }
 
   ngOnInit() {
-    this.pokeapiService.getPokemonList().subscribe({
-      next: (data) => {
-        this.pokeInfoList = data['results'];
-        this.fillPokeNameList();
-      },
-      error: (error) => {
-        console.error('There was an error!', error);
-      }
-    });
+    this.fillPokemonInfoList();
+    console.log(this.fullPokemonInfoList);
   }
 
-  fillPokeNameList() {
-    for (let i = 0; i < this.pokeInfoList.length; i++) {
-      this.pokeNameList.push(this.pokeInfoList[i]['name']);
+  fillPokemonInfoList(){
+    for (let i = 0; i < 1025; i++){
+      this.pokeapiService.getPokemonInfoList().subscribe({
+        next: (data) => {
+          this.fullPokemonInfoList.push(data);
+          this.pokeNameList.push(this.capitalizeFirstLetter(data['name']));
+        },
+        error: (error) => {
+          console.error('There was an error!', error);
+        }
+      });
     }
+  }
+
+  capitalizeFirstLetter(string: string){
+    return string.charAt(0).toUpperCase() + string.slice(1);
   }
 }

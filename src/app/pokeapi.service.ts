@@ -6,11 +6,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PokeapiService {
-private apiUrl = "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0";
+  private singleUrl = 'https://pokeapi.co/api/v2/pokemon/';
+  number: number = 0;
 
   constructor(private http: HttpClient) { }
 
-  getPokemonList(): Observable<any>{
-    return this.http.get(this.apiUrl);
+  getPokemonInfoList(): Observable<any> {
+    this.number++;
+    return this.http.get(this.singleUrl + this.number);
   }
 }
