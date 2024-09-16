@@ -7,4 +7,19 @@ section {
     background-color: lightblue;
     border-radius: 10px;
     padding: 5px;
+    flex-direction: column;
+}
+
+.type-sprite-container {
+    display: flex;
+}
+
+.sprite-container {
+    height: 100px;
+    width: 100px;
+}
+
+img {
+    height: 100%;
+    width: 100%;
 }

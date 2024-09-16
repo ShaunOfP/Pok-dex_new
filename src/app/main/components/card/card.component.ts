@@ -8,5 +8,7 @@ import { Component, Input } from '@angular/core';
   styleUrl: './card.component.scss'
 })
 export class CardComponent {
-  @Input()pokeName = '';
+  @Input() pokeName = '';
+  @Input() pokeId = 0;
+  @Input() pokeSprite = '';
 }

@@ -1,6 +1,6 @@
 <section>
     <h1>Pokédex</h1>
     <div id="cardContainer">
-        <app-card *ngFor="let pokemon of pokeNameList" [pokeName]="pokemon"></app-card>
+        <app-card *ngFor="let pokemon of pokeNameList; index as i;" [pokeName]="pokemon" [pokeId]="i + 1"></app-card>
     </div>
 </section>
