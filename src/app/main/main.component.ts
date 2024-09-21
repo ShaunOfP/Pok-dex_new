@@ -25,7 +25,7 @@ export class MainComponent implements OnInit {
   }
 
   fillPokemonInfoList() {
-    for (let i = 0; i < 12; i++) { //1025
+    for (let i = 0; i < 1025; i++) { //1025
       this.pokeapiService.getPokemonInfoList().subscribe({
         next: (data) => {
           data = {
@@ -33,7 +33,7 @@ export class MainComponent implements OnInit {
             base_experience: data.base_experience,
             game_indices: this.searchDataSubArrayForValues(data.game_indices, 'version', 'name'),
             forms: this.searchDataSubArrayForValues(data.forms, '', 'name'),
-            id: data.id,
+            id: this.formatNumber(data.id),
             moves: this.searchDataSubArrayForValues(data.moves, 'move', 'name'),
             name: this.capitalizeFirstLetter(data.name),
             species: data.species,
@@ -53,6 +53,10 @@ export class MainComponent implements OnInit {
 
   capitalizeFirstLetter(string: string): string {
     return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  formatNumber(value: number): string {
+    return value.toString().padStart(3, '0');
   }
 
   searchDataSubArrayForValues(array: string[], searchValue1: string, searchValue2: string) {
