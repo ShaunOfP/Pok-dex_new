@@ -5,8 +5,8 @@
     </div>
     <div class="type-sprite-container">
         <div class="type-container">
-            <div>{{ pokeInfo['types'][0]['type']['name'] }}</div>
-            <div *ngIf="pokeInfo['types'][1]">{{ pokeInfo['types'][1]['type']['name'] }}</div>
+            <div>{{ pokeInfo['types'][0] }}</div>
+            <div *ngIf="pokeInfo['types'][1]">{{ pokeInfo['types'][1] }}</div>
         </div>
         <div class="sprite-container">
             <img src="{{ pokeInfo['sprites']['other']['official-artwork']['front_default'] }}">
