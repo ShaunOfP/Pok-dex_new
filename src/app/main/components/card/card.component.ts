@@ -1,19 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
-interface Pokemon {
-  abilities: [];
-  base_experience: number;
-  forms: [];
-  id: number;
-  moves: [];
-  name: string;
-  sprites: [];
-  stats: [];
-  types: [];
-  weight: number;
-}
-
 @Component({
   selector: 'app-card',
   standalone: true,
