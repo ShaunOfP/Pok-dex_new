@@ -18,4 +18,8 @@ export class CardComponent {
   ngOnInit(): void{
     console.log(this.pokeInfo);
   }
+
+  hello(){
+    alert("Hello");
+  }
 }
