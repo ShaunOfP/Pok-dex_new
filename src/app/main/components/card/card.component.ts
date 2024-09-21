@@ -1,6 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
+interface Pokemon {
+  abilities: [];
+  base_experience: number;
+  forms: [];
+  id: number;
+  moves: [];
+  name: string;
+  sprites: [];
+  stats: [];
+  types: [];
+  weight: number;
+}
+
 @Component({
   selector: 'app-card',
   standalone: true,
@@ -9,21 +22,13 @@ import { Component, Input } from '@angular/core';
   styleUrl: './card.component.scss'
 })
 export class CardComponent {
-  @Input() pokeName = '';
-  @Input() pokeId = 0;
-  @Input() pokeSprite = '';
-  @Input() typeOne = '';
-  @Input() typeTwo = '';
-  @Input() pokeInfo = {
-    abilities: [],
-    base_experience: 64,
-    forms: [],
-    id: 1,
-    moves: [],
-    name: 'bulbasaur',
-    sprites: [],
-    stats: [],
-    types: [],
-    weight: 69
-  };
+  @Input() pokeInfo: any = {};
+
+  constructor() {
+    
+  }
+
+  ngOnInit(): void{
+    console.log(this.pokeInfo);
+  }
 }
