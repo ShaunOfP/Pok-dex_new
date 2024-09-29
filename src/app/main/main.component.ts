@@ -3,11 +3,12 @@ import { PokeapiService } from '../pokeapi.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CardComponent } from './components/card/card.component';
 import { CommonModule } from '@angular/common';
+import { DetailsComponent } from "./details/details.component";
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [HttpClientModule, CardComponent, CommonModule],
+  imports: [HttpClientModule, CardComponent, CommonModule, DetailsComponent],
   providers: [PokeapiService],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
@@ -15,17 +16,17 @@ import { CommonModule } from '@angular/common';
 
 export class MainComponent implements OnInit {
   fullPokemonInfoList: object[] = [];
+  currentPokemonData: Object = {};
 
   constructor(private pokeapiService: PokeapiService) {
   }
 
   ngOnInit() {
     this.fillPokemonInfoList();
-    console.log(this.fullPokemonInfoList);
   }
 
   fillPokemonInfoList() {
-    for (let i = 0; i < 1025; i++) { //1025
+    for (let i = 0; i < 1025; i++) {
       this.pokeapiService.getPokemonInfoList().subscribe({
         next: (data) => {
           data = {
@@ -67,5 +68,11 @@ export class MainComponent implements OnInit {
         return item[searchValue1][searchValue2] = this.capitalizeFirstLetter(item[searchValue1][searchValue2]);
       }
     });
+  }
+
+  setCurrentPokemonData(pokemonData: Object){
+    this.currentPokemonData = pokemonData;
+    console.log(pokemonData);
+    document.getElementById('details')?.classList.remove('dp-none');
   }
 }

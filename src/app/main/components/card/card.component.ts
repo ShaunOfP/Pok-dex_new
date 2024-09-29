@@ -10,16 +10,4 @@ import { Component, Input } from '@angular/core';
 })
 export class CardComponent {
   @Input() pokeInfo: any = {};
-
-  constructor() {
-    
-  }
-
-  ngOnInit(): void{
-    console.log(this.pokeInfo);
-  }
-
-  hello(){
-    alert("Hello");
-  }
 }

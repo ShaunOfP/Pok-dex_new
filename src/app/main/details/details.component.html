@@ -1,0 +1,29 @@
+<section id="details" class="dp-none">
+    <div class="arrow">
+        <img src="./assets/img/arrow-back.svg">
+    </div>
+    <div>
+        <div>
+            <div>
+                {{ currentPokemonData['name'] }}
+            </div>
+            <div>
+                {{ currentPokemonData['id'] }}
+            </div>
+        </div>
+        <div>
+            <div *ngIf="currentPokemonData['types']">{{ currentPokemonData['types'][0] }}</div>
+            <div *ngIf="currentPokemonData['types']">{{ currentPokemonData['types'][1] }}</div>
+        </div>
+    </div>
+    <img *ngIf="currentPokemonData['sprites']" src="{{ currentPokemonData['sprites']['other']['official-artwork']['front_default'] }}">
+    <div class="lower-part">
+        <nav class="lower-part-nav">
+            <span (click)="loadAbout()">About</span>
+            <span (click)="loadStats()">Base Stats</span>
+            <span (click)="loadEvo()">Evolution</span>
+            <span (click)="loadMoves()">Moves</span>
+        </nav>
+        <span id="data"></span>
+    </div>
+</section>

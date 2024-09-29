@@ -1,0 +1,50 @@
+section {
+    background-color: lightblue;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.arrow {
+    height: 50px;
+    width: 50px;
+    margin-left: 50px;
+    margin-top: 50px;
+
+    >img {
+        height: 100%;
+        width: 100%
+    }
+}
+
+.dp-none {
+    display: none;
+}
+
+.lower-part {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40vh;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    background-color: white;
+}
+
+.lower-part-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-top: 30px;
+    font-size: 1.5rem;
+    color: black;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
