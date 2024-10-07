@@ -1,22 +1,23 @@
 <section id="details" class="dp-none">
     <div class="arrow">
-        <img src="./assets/img/arrow-back.svg">
+        <img (click)="removeDetailsOverlay()" src="./assets/img/arrow-back.svg">
     </div>
-    <div>
-        <div>
+    <div class="top-part">
+        <div class="top-part-header">
             <div>
                 {{ currentPokemonData['name'] }}
             </div>
             <div>
-                {{ currentPokemonData['id'] }}
+                #{{ currentPokemonData['id'] }}
             </div>
         </div>
-        <div>
+        <div class="top-part-types">
             <div *ngIf="currentPokemonData['types']">{{ currentPokemonData['types'][0] }}</div>
             <div *ngIf="currentPokemonData['types']">{{ currentPokemonData['types'][1] }}</div>
         </div>
+        <img class="pokemon-image" *ngIf="currentPokemonData['sprites']"
+            src="{{ currentPokemonData['sprites']['other']['official-artwork']['front_default'] }}">
     </div>
-    <img *ngIf="currentPokemonData['sprites']" src="{{ currentPokemonData['sprites']['other']['official-artwork']['front_default'] }}">
     <div class="lower-part">
         <nav class="lower-part-nav">
             <span (click)="loadAbout()">About</span>
@@ -24,6 +25,36 @@
             <span (click)="loadEvo()">Evolution</span>
             <span (click)="loadMoves()">Moves</span>
         </nav>
-        <span id="data"></span>
+        <div *ngIf="menuNumber == 1" class="info-container">
+            <div class="flex-column text-left border-shadow padding">
+                <span class="color-grey bold">Weight</span>
+                <span class="bold">{{ currentPokemonData['weight'] }}</span>
+            </div>
+            <div class="flex gap-40">
+                <span class="color-grey bold">Base Exp</span>
+                <span class="bold">{{ currentPokemonData['base_experience'] }}</span>
+            </div>
+        </div>
+        <div *ngIf="menuNumber == 2" class="info-container">
+            <table>
+                <tr *ngFor="let stat of currentPokemonData['stats']; index as i">
+                    <td class="color-grey bold">{{ capitalizeFirstLetter(currentPokemonData['stats'][i]['stat']['name']) }}</td>
+                    <td class="padding-left-40 bold">{{ currentPokemonData['stats'][i]['base_stat'] }}</td>
+                </tr>
+            </table>
+        </div>
+        <div *ngIf="menuNumber == 3" class="info-container">
+            <div>
+
+            </div>
+            <div>
+
+            </div>
+        </div>
+        <div *ngIf="menuNumber == 4" class="info-container height-25 y-scroll">
+            <span *ngFor="let move of currentPokemonData['moves']; index as i" class="bold">
+                {{ currentPokemonData['moves'][i] }}
+            </span>
+        </div>
     </div>
 </section>

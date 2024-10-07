@@ -39,7 +39,7 @@ export class MainComponent implements OnInit {
             name: this.capitalizeFirstLetter(data.name),
             species: data.species,
             sprites: data.sprites,
-            stats: this.searchDataSubArrayForValues(data.stats, 'stat', 'name'),
+            stats: data.stats,
             types: this.searchDataSubArrayForValues(data.types, 'type', 'name'),
             weight: data.weight
           };
@@ -72,7 +72,6 @@ export class MainComponent implements OnInit {
 
   setCurrentPokemonData(pokemonData: Object){
     this.currentPokemonData = pokemonData;
-    console.log(pokemonData);
     document.getElementById('details')?.classList.remove('dp-none');
   }
 }

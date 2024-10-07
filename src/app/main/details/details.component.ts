@@ -24,24 +24,34 @@ export class DetailsComponent {
     weight: 0
   };
 
+  menuNumber: number = 1;
+
   constructor() {
-    console.log("Im loaded");
-    console.log(this.currentPokemonData);
   }
 
   loadAbout() {
-
+    this.menuNumber = 1;
   }
 
   loadStats() {
-
+    this.menuNumber = 2;
   }
 
   loadEvo() {
-
+    this.menuNumber = 3;
+    console.log(this.currentPokemonData);
   }
 
   loadMoves() {
+    this.menuNumber = 4;
+  }
 
+  removeDetailsOverlay() {
+    this.menuNumber = 1;
+    document.getElementById('details')?.classList.add('dp-none');
+  }
+
+  capitalizeFirstLetter(string: string): string {
+    return string.charAt(0).toUpperCase() + string.slice(1);
   }
 }

@@ -7,6 +7,7 @@ section {
     z-index: 0;
     height: 100%;
     width: 100%;
+    font-size: 1.2rem;
 }
 
 .arrow {
@@ -17,8 +18,49 @@ section {
 
     >img {
         height: 100%;
-        width: 100%
+        width: 100%;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
+}
+
+.top-part {
+    height: 60vh;
+}
+
+.top-part-header {
+    display: flex;
+    padding-left: 50px;
+    padding-right: 50px;
+    justify-content: space-between;
+    font-weight: bold;
+
+    >:first-child {
+        font-size: 32px;
+    }
+}
+
+.top-part-types {
+    display: flex;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 15px;
+    gap: 7px;
+
+    >div {
+        background-color: rgba(255, 255, 255, 0.795);
+        border-radius: 15px;
+        padding: 3px 20px 3px 20px;
+    }
+}
+
+.pokemon-image {
+    position: relative;
+    height: 420px;
+    width: 420px;
+    z-index: 1;
 }
 
 .dp-none {
@@ -41,10 +83,90 @@ section {
     align-items: center;
     justify-content: space-around;
     padding-top: 30px;
+    padding-bottom: 30px;
     font-size: 1.5rem;
     color: black;
 
-    &:hover {
-        cursor: pointer;
+    >span {
+        display: relative;
+        z-index: 1;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
+}
+
+.info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 85%;
+    margin: auto;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.border-shadow {
+    border-radius: 12px;
+    box-shadow: 0px 1px 5px -1px rgba(102, 100, 102, 1);
+}
+
+.padding {
+    padding: 5px 20px 5px 20px;
+}
+
+.color-grey {
+    color: grey
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.flex {
+    display: flex;
+}
+
+.gap-40 {
+    gap: 40px;
+}
+
+table {
+    >tr {
+        text-align: left;
+    }
+}
+
+.padding-left-40 {
+    padding-left: 40px;
+}
+
+.y-scroll {
+    overflow-y: scroll;
+}
+
+.y-scroll::-webkit-scrollbar {
+    width: 10px;
+}
+
+.y-scroll::-webkit-scrollbar-track {
+    background: lightgrey;
+    border-radius: 5px;
+}
+
+.y-scroll::-webkit-scrollbar-thumb {
+    background: red;
+    border-radius: 5px;
+}
+
+.height-25 {
+    height: 25vh;
 }
