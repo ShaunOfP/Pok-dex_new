@@ -17,12 +17,14 @@ import { DetailsComponent } from "./details/details.component";
 export class MainComponent implements OnInit {
   fullPokemonInfoList: object[] = [];
   currentPokemonData: Object = {};
+  fullEvoltionInfoList: object[] = [];
 
   constructor(private pokeapiService: PokeapiService) {
   }
 
   ngOnInit() {
     this.fillPokemonInfoList();
+    this.fillEvolutionInfoList();
   }
 
   fillPokemonInfoList() {
@@ -46,7 +48,20 @@ export class MainComponent implements OnInit {
           this.fullPokemonInfoList.push(data);
         },
         error: (error) => {
-          console.error('There was an error!', error);
+          console.error('There was an error retrieving the Pokemon Data from the API!', error);
+        }
+      });
+    }
+  }
+
+  fillEvolutionInfoList(){
+    for (let i = 0; i < 549; i++){
+      this.pokeapiService.getEvolutionInfoList().subscribe({
+        next: (data) => {
+          console.log(data);
+        },
+        error: (error) => {
+          console.error('There was an error retrieving the Evolution Data from the API!', error);
         }
       });
     }
