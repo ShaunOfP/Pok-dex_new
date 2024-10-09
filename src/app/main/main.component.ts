@@ -25,6 +25,7 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     this.fillPokemonInfoList();
     this.fillEvolutionInfoList();
+    console.log(this.fullEvoltionInfoList);
   }
 
   fillPokemonInfoList() {
@@ -54,11 +55,35 @@ export class MainComponent implements OnInit {
     }
   }
 
-  fillEvolutionInfoList(){
-    for (let i = 0; i < 549; i++){
+
+  /**
+   * 541 because: last filled index on the api is 549, but we need to subtract 7 because we skip 7 empty entries in the getEvolutionInfoList-function in the pokeapi.service.ts
+   */
+  fillEvolutionInfoList() {
+    for (let i = 0; i < 541; i++) {
       this.pokeapiService.getEvolutionInfoList().subscribe({
         next: (data) => {
-          console.log(data);
+          if (data.chain['evolves_to'][0]['evolves_to'][0])
+            data = {
+              baby: data.chain['species']['name'],
+              first: data.chain['evolves_to'][0]['species']['name'],
+              second: data.chain['evolves_to'][0]['evolves_to'][0]['species']['name']
+            };
+          else if (data.chain['evolves_to'][0]) {
+            data = {
+              baby: data.chain['species']['name'],
+              first: data.chain['evolves_to'][0]['species']['name'],
+              second: ''
+            }
+          }
+          else {
+            data = {
+              baby: data.chain['species']['name'],
+              first: '',
+              second: ''
+            }
+          }
+          this.fullEvoltionInfoList.push(data);
         },
         error: (error) => {
           console.error('There was an error retrieving the Evolution Data from the API!', error);
@@ -85,7 +110,7 @@ export class MainComponent implements OnInit {
     });
   }
 
-  setCurrentPokemonData(pokemonData: Object){
+  setCurrentPokemonData(pokemonData: Object) {
     this.currentPokemonData = pokemonData;
     document.getElementById('details')?.classList.remove('dp-none');
   }
