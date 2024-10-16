@@ -1,7 +1,7 @@
 <section>
     <div class="name-id-container">
         <div>{{ pokeInfo['name'] }}</div>
-        <div>#{{ pokeInfo['id'] }}</div>
+        <div>#{{ pokeInfo['formattedId'] }}</div>
     </div>
     <div class="type-sprite-container">
         <div class="type-container">
@@ -9,7 +9,7 @@
             <div *ngIf="pokeInfo['types'][1]">{{ pokeInfo['types'][1] }}</div>
         </div>
         <div class="sprite-container">
-            <img src="{{ pokeInfo['sprites']['other']['official-artwork']['front_default'] }}">
+            <img src="{{ pokeInfo['sprites'] }}">
         </div>
     </div>
 </section>

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { Pokemon } from '../../pokemon.class';
 
 @Component({
   selector: 'app-details',
@@ -9,20 +10,7 @@ import { Component, Input } from '@angular/core';
   styleUrl: './details.component.scss'
 })
 export class DetailsComponent {
-  @Input() currentPokemonData: any = {
-    abilities: '',
-    base_experience: 0,
-    game_indices: '',
-    forms: '',
-    id: 0,
-    moves: '',
-    name: '',
-    species: '',
-    sprites: '',
-    stats: '',
-    types: '',
-    weight: 0
-  };
+  @Input() currentPokemonData: Pokemon = new Pokemon;
 
   menuNumber: number = 1;
 
@@ -31,6 +19,7 @@ export class DetailsComponent {
 
   loadAbout() {
     this.menuNumber = 1;
+    console.log(this.currentPokemonData['evolution']);
   }
 
   loadStats() {
@@ -39,7 +28,6 @@ export class DetailsComponent {
 
   loadEvo() {
     this.menuNumber = 3;
-    console.log(this.currentPokemonData);
   }
 
   loadMoves() {

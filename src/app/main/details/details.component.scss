@@ -170,3 +170,21 @@ table {
 .height-25 {
     height: 25vh;
 }
+
+.evo-container {
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.evo-picture-container {
+    width: 200px;
+
+    &:hover{
+        cursor: pointer;
+    }
+
+    >img {
+        height: 100%;
+        width: 100%;
+    }
+}

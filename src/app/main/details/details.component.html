@@ -8,15 +8,14 @@
                 {{ currentPokemonData['name'] }}
             </div>
             <div>
-                #{{ currentPokemonData['id'] }}
+                #{{ currentPokemonData['formattedId'] }}
             </div>
         </div>
         <div class="top-part-types">
             <div *ngIf="currentPokemonData['types']">{{ currentPokemonData['types'][0] }}</div>
             <div *ngIf="currentPokemonData['types']">{{ currentPokemonData['types'][1] }}</div>
         </div>
-        <img class="pokemon-image" *ngIf="currentPokemonData['sprites']"
-            src="{{ currentPokemonData['sprites']['other']['official-artwork']['front_default'] }}">
+        <img class="pokemon-image" *ngIf="currentPokemonData['sprites']" src="{{ currentPokemonData['sprites'] }}">
     </div>
     <div class="lower-part">
         <nav class="lower-part-nav">
@@ -43,17 +42,23 @@
                 </tr>
             </table>
         </div>
-        <div *ngIf="menuNumber == 3" class="info-container">
-            <div>
-
+        <div *ngIf="menuNumber == 3" class="info-container evo-container">
+            <!-- <div *ngIf="currentPokemonData['evolution'][0]" class="evo-picture-container">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{ currentPokemonData['evolution'][0]['spriteNr'] }}.png">
+                <span>{{ currentPokemonData['evolution']['baby'] }}</span>
+            </div> -->
+            <div *ngIf="currentPokemonData['evolution'][1]" class="evo-picture-container">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{ currentPokemonData['evolution'][1]['spriteNr'] }}.png">
+                <span>{{ currentPokemonData['evolution'][1]['name'] }}</span>
             </div>
-            <div>
-                
+            <div *ngIf="currentPokemonData['evolution'][2]['spriteNr'] > 0" class="evo-picture-container">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{ currentPokemonData['evolution'][2]['spriteNr'] }}.png">
+                <span>{{ currentPokemonData['evolution'][2]['name'] }}</span>
             </div>
         </div>
         <div *ngIf="menuNumber == 4" class="info-container height-25 y-scroll">
-            <span *ngFor="let move of currentPokemonData['moves']; index as i" class="bold">
-                {{ currentPokemonData['moves'][i] }}
+            <span *ngFor="let move of currentPokemonData['moves']" class="bold">
+                {{ move }}
             </span>
         </div>
     </div>
