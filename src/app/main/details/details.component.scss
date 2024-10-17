@@ -178,6 +178,7 @@ table {
 
 .evo-picture-container {
     width: 200px;
+    flex-wrap: wrap;
 
     &:hover{
         cursor: pointer;

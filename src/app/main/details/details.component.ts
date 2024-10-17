@@ -19,7 +19,7 @@ export class DetailsComponent {
 
   loadAbout() {
     this.menuNumber = 1;
-    console.log(this.currentPokemonData['evolution']);
+    console.log(this.currentPokemonData['types'].length);
   }
 
   loadStats() {
@@ -41,5 +41,13 @@ export class DetailsComponent {
 
   capitalizeFirstLetter(string: string): string {
     return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  valid(pokemonEvolution: any){
+    if (pokemonEvolution['name'] != this.currentPokemonData['name']){
+      return true;
+    } else {
+      return false;
+    }
   }
 }
