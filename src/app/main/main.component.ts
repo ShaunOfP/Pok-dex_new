@@ -28,7 +28,6 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     this.fillPokemonInfoList();
     this.fillEvolutionInfoList();
-    // console.log(this.fullPokemonInfoList);
   }
 
 

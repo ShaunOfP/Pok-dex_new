@@ -11,6 +11,10 @@ import { Pokemon } from '../../pokemon.class';
 })
 export class DetailsComponent {
   @Input() currentPokemonData: Pokemon = new Pokemon;
+  @Input() fullPokemonList: Array<any> = [];
+  evoImage1: string = "";
+  evoImage2: string = "";
+  evoImage3: string = "";
 
   menuNumber: number = 1;
 
@@ -19,7 +23,7 @@ export class DetailsComponent {
 
   loadAbout() {
     this.menuNumber = 1;
-    console.log(this.currentPokemonData['types'].length);
+    console.log(this.currentPokemonData);
   }
 
   loadStats() {
@@ -28,6 +32,9 @@ export class DetailsComponent {
 
   loadEvo() {
     this.menuNumber = 3;
+    if (this.currentPokemonData['evolution'][0]['name']) this.loadPokemonSpriteForEvolution(this.currentPokemonData['evolution'][0]['name'], 0);
+    if (this.currentPokemonData['evolution'][1]['name']) this.loadPokemonSpriteForEvolution(this.currentPokemonData['evolution'][1]['name'], 1);
+    if (this.currentPokemonData['evolution'][2]['name']) this.loadPokemonSpriteForEvolution(this.currentPokemonData['evolution'][2]['name'], 2);
   }
 
   loadMoves() {
@@ -43,11 +50,30 @@ export class DetailsComponent {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
-  valid(pokemonEvolution: any){
-    if (pokemonEvolution['name'] != this.currentPokemonData['name']){
+  currentPokemonIsNotDisplayedInEvolutions(pokemonEvolution: any) {
+    if (pokemonEvolution['name'] != this.currentPokemonData['name']) {
       return true;
     } else {
       return false;
     }
+  }
+
+  loadPokemonSpriteForEvolution(pokename: string, id: number) {
+    this.fullPokemonList.find((pokemon) => {
+      if (pokemon.name === pokename) {
+        switch (id) {
+          case 0:
+            this.evoImage1 = pokemon.sprites;
+            break;
+          case 1:
+            this.evoImage2 = pokemon.sprites;
+            break;
+          case 2:
+            this.evoImage3 = pokemon.sprites;
+            break;
+        }
+      }
+      return "";
+    });
   }
 }

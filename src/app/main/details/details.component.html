@@ -37,22 +37,26 @@
         <div *ngIf="menuNumber == 2" class="info-container">
             <table>
                 <tr *ngFor="let stat of currentPokemonData['stats']; index as i">
-                    <td class="color-grey bold">{{ capitalizeFirstLetter(currentPokemonData['stats'][i]['stat']['name']) }}</td>
+                    <td class="color-grey bold">{{ capitalizeFirstLetter(currentPokemonData['stats'][i]['stat']['name'])
+                        }}</td>
                     <td class="padding-left-40 bold">{{ currentPokemonData['stats'][i]['base_stat'] }}</td>
                 </tr>
             </table>
         </div>
         <div *ngIf="menuNumber == 3" class="info-container evo-container">
-            <div *ngIf="currentPokemonData['evolution'][0]['name'] != '' && valid(currentPokemonData['evolution'][0])" class="evo-picture-container">
-                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{ currentPokemonData['evolution'][0]['spriteNr'] }}.png">
+            <div *ngIf="currentPokemonData['evolution'][0]['name'] != '' && currentPokemonIsNotDisplayedInEvolutions(currentPokemonData['evolution'][0])"
+                class="evo-picture-container">
+                <img src="{{ evoImage1 }}">
                 <span>{{ currentPokemonData['evolution'][0]['name'] }}</span>
             </div>
-            <div *ngIf="currentPokemonData['evolution'][1]['name'] != '' && valid(currentPokemonData['evolution'][1])" class="evo-picture-container">
-                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{ currentPokemonData['evolution'][1]['spriteNr'] }}.png">
+            <div *ngIf="currentPokemonData['evolution'][1]['name'] != '' && currentPokemonIsNotDisplayedInEvolutions(currentPokemonData['evolution'][1])"
+                class="evo-picture-container">
+                <img src="{{ evoImage2 }}">
                 <span>{{ currentPokemonData['evolution'][1]['name'] }}</span>
             </div>
-            <div *ngIf="currentPokemonData['evolution'][2]['name'] != '' && valid(currentPokemonData['evolution'][2])" class="evo-picture-container">
-                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{ currentPokemonData['evolution'][2]['spriteNr'] }}.png">
+            <div *ngIf="currentPokemonData['evolution'][2]['name'] != '' && currentPokemonIsNotDisplayedInEvolutions(currentPokemonData['evolution'][2])"
+                class="evo-picture-container">
+                <img src="{{ evoImage3 }}">
                 <span>{{ currentPokemonData['evolution'][2]['name'] }}</span>
             </div>
         </div>
