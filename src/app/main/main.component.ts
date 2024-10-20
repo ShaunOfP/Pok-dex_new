@@ -74,46 +74,37 @@ export class MainComponent implements OnInit {
           if (data.chain['evolves_to'] == 0) {
             data = [
               {
-                name: this.capitalizeFirstLetter(data.chain['species']['name']),
-                spriteNr: this.generateSpriteNumber()
+                name: this.capitalizeFirstLetter(data.chain['species']['name'])
               },
               {
-                name: '',
-                spriteNr: ''
+                name: ''
               },
               {
-                name: '',
-                spriteNr: ''
+                name: ''
               }
             ];
           } else if (data.chain['evolves_to'][0]['evolves_to'] == 0) {
             data = [
               {
-                name: this.capitalizeFirstLetter(data.chain['species']['name']),
-                spriteNr: this.generateSpriteNumber()
+                name: this.capitalizeFirstLetter(data.chain['species']['name'])
               },
               {
-                name: this.capitalizeFirstLetter(data.chain['evolves_to'][0]['species']['name']),
-                spriteNr: this.generateSpriteNumber()
+                name: this.capitalizeFirstLetter(data.chain['evolves_to'][0]['species']['name'])
               },
               {
-                name: '',
-                spriteNr: ''
+                name: ''
               }
             ];
           } else {
             data = [
               {
-                name: this.capitalizeFirstLetter(data.chain['species']['name']),
-                spriteNr: this.generateSpriteNumber()
+                name: this.capitalizeFirstLetter(data.chain['species']['name'])
               },
               {
-                name: this.capitalizeFirstLetter(data.chain['evolves_to'][0]['species']['name']),
-                spriteNr: this.generateSpriteNumber()
+                name: this.capitalizeFirstLetter(data.chain['evolves_to'][0]['species']['name'])
               },
               {
-                name: this.capitalizeFirstLetter(data.chain['evolves_to'][0]['evolves_to'][0]['species']['name']),
-                spriteNr: this.generateSpriteNumber()
+                name: this.capitalizeFirstLetter(data.chain['evolves_to'][0]['evolves_to'][0]['species']['name'])
               }
             ];
           }
@@ -124,12 +115,6 @@ export class MainComponent implements OnInit {
         }
       });
     }
-  }
-
-
-  generateSpriteNumber() {
-    this.spriteNumber++;
-    return this.spriteNumber;
   }
 
 

@@ -73,7 +73,7 @@ export class DetailsComponent {
             break;
         }
       }
-      return "";
+      return;
     });
   }
 }
