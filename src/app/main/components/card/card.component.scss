@@ -4,7 +4,6 @@ section {
     max-width: 250px;
     width: 100%;
     display: flex;
-    background-color: lightblue;
     border-radius: 10px;
     padding: 5px;
     flex-direction: column;
@@ -13,6 +12,46 @@ section {
     &:hover{
         cursor: pointer;
     }
+}
+
+.green{
+    background-color: #41D168;
+}
+
+.black{
+    background-color: #272727;
+}
+
+.yellow{
+    background-color: #A8B820;
+}
+
+.white{
+    background-color: #FFFFFF;
+}
+
+.red{
+    background-color: #FA6555;
+}
+
+.blue{
+    background-color: #0055D4;
+}
+
+.purple{
+    background-color: #953594;
+}
+
+.pink{
+    background-color: #be3379;
+}
+
+.gray{
+    background-color: #919191;
+}
+
+.brown{
+    background-color: #9D9B6A;
 }
 
 .name-id-container{

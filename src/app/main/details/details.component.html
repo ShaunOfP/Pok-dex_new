@@ -36,11 +36,19 @@
         </div>
         <div *ngIf="menuNumber == 2" class="info-container">
             <table>
-                <tr *ngFor="let stat of currentPokemonData['stats']; index as i">
+                @for (stat of currentPokemonData['stats']; track currentPokemonData.name; let i = $index){
+                <tr>
                     <td class="color-grey bold">{{ capitalizeFirstLetter(currentPokemonData['stats'][i]['stat']['name'])
                         }}</td>
-                    <td class="padding-left-40 bold">{{ currentPokemonData['stats'][i]['base_stat'] }}</td>
+                    <td class="padding-left-40 bold desktop-stats">{{ currentPokemonData['stats'][i]['base_stat']
+                        }}<meter min="0" max="100" value="{{ currentPokemonData['stats'][i]['base_stat'] }}"></meter>
+                    </td>
                 </tr>
+                <tr class="mobile-stats">
+                    <td class="bold">{{ currentPokemonData['stats'][i]['base_stat'] }}<meter min="0" max="100"
+                            value="{{ currentPokemonData['stats'][i]['base_stat'] }}"></meter></td>
+                </tr>
+                }
             </table>
         </div>
         <div *ngIf="menuNumber == 3" class="info-container evo-container">
@@ -60,7 +68,7 @@
                 <span>{{ currentPokemonData['evolution'][2]['name'] }}</span>
             </div>
         </div>
-        <div *ngIf="menuNumber == 4" class="info-container height-25 y-scroll">
+        <div *ngIf="menuNumber == 4" class="info-container height-25 y-scroll wrap">
             <span *ngFor="let move of currentPokemonData['moves']" class="bold">
                 {{ move }}
             </span>

@@ -16,16 +16,16 @@ import { Pokemon } from '../pokemon.class';
 })
 
 export class MainComponent implements OnInit {
+  colorList: Array<any> = [];
   fullPokemonInfoList: Array<any> = [];
   currentPokemonData: Pokemon = new Pokemon();
-  spriteNumber: number = 0;
-
 
   constructor(private pokeapiService: PokeapiService) {
   }
 
 
   ngOnInit() {
+    this.pushPokemonColorsIntoArray();
     this.fillPokemonInfoList();
     this.fillEvolutionInfoList();
   }
@@ -52,7 +52,8 @@ export class MainComponent implements OnInit {
             stats: data.stats,
             types: this.searchDataSubArrayForValues(data.types, 'type', 'name'),
             weight: data.weight,
-            evolution: ''
+            evolution: '',
+            color: this.getPokemonColor(this.capitalizeFirstLetter(data.name))
           };
           this.fullPokemonInfoList.push(data);
         },
@@ -118,6 +119,24 @@ export class MainComponent implements OnInit {
   }
 
 
+  pushPokemonColorsIntoArray(){
+    for (let i = 0; i < 10; i++) {
+      this.pokeapiService.getColorsOfPokemon().subscribe({
+        next: (data) => {
+          data = {
+            name: data.name,
+            pokemon_species: this.searchDataSubArrayForValues(data.pokemon_species, "", "name")
+          }
+          this.colorList.push(data);
+        },
+        error: (error) => {
+          console.error('There was an error retrieving the Pokemon Color Data from the API!', error);
+        }
+      });
+    }
+  }
+
+
   capitalizeFirstLetter(string: string): string {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
@@ -155,5 +174,14 @@ export class MainComponent implements OnInit {
         pokemon.evolution = evolutionData;
       }
     });
+  }
+
+
+  getPokemonColor(pokemonName: string){
+      for (let i = 0; i < this.colorList.length; i++){
+        if (this.colorList[i]['pokemon_species'].includes(pokemonName)){
+          return this.colorList[i]['name'];
+        }
+      }
   }
 }

@@ -149,6 +149,10 @@ table {
     padding-left: 40px;
 }
 
+.wrap{
+    flex-wrap: wrap;
+}
+
 .y-scroll {
     overflow-y: scroll;
 }
@@ -178,14 +182,35 @@ table {
 
 .evo-picture-container {
     width: 200px;
-    flex-wrap: wrap;
 
-    &:hover{
+    &:hover {
         cursor: pointer;
     }
 
     >img {
         height: 100%;
         width: 100%;
+    }
+}
+
+meter {
+    margin-left: 10px;
+}
+
+.mobile-stats {
+    display: none;
+}
+
+@media (max-width: 400px) {
+    .desktop-stats {
+        display: none;
+    }
+
+    .mobile-stats {
+        display: flex;
+    }
+
+    meter {
+        margin-left: 0;
     }
 }
