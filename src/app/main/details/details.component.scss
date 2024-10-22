@@ -58,8 +58,10 @@ section {
 
 .pokemon-image {
     position: relative;
-    height: 420px;
-    width: 420px;
+    max-height: 420px;
+    height: 100%;
+    max-width: 420px;
+    width: 100%;
     z-index: 1;
 }
 
@@ -149,7 +151,7 @@ table {
     padding-left: 40px;
 }
 
-.wrap{
+.wrap {
     flex-wrap: wrap;
 }
 
@@ -201,47 +203,56 @@ meter {
     display: none;
 }
 
-.green{
+.green {
     background-color: #41D168;
 }
 
-.black{
+.black {
     background-color: #272727;
 }
 
-.yellow{
+.yellow {
     background-color: #A8B820;
 }
 
-.white{
-    background-color: #FFFFFF;
+.white {
+    background-color: #e7e7e7;
 }
 
-.red{
+.red {
     background-color: #FA6555;
 }
 
-.blue{
+.blue {
     background-color: #0055D4;
 }
 
-.purple{
+.purple {
     background-color: #953594;
 }
 
-.pink{
+.pink {
     background-color: #be3379;
 }
 
-.gray{
+.gray {
     background-color: #919191;
 }
 
-.brown{
+.brown {
     background-color: #9D9B6A;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 500px) {
+    .pokemon-image {
+        max-height: 350px;
+        max-width: 350px;
+        bottom: -10%;
+        // bottom: -55px;
+    }
+}
+
+@media (max-width: 410px) {
     .desktop-stats {
         display: none;
     }

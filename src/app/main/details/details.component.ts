@@ -31,9 +31,9 @@ export class DetailsComponent {
 
   loadEvo() {
     this.menuNumber = 3;
-    if (this.currentPokemonData['evolution'][0]['name']) this.loadPokemonSpriteForEvolution(this.currentPokemonData['evolution'][0]['name'], 0);
-    if (this.currentPokemonData['evolution'][1]['name']) this.loadPokemonSpriteForEvolution(this.currentPokemonData['evolution'][1]['name'], 1);
-    if (this.currentPokemonData['evolution'][2]['name']) this.loadPokemonSpriteForEvolution(this.currentPokemonData['evolution'][2]['name'], 2);
+    if (this.currentPokemonData['evolution']) this.loadPokemonSpriteForEvolution(this.currentPokemonData['evolution'][0][0], 0);
+    if (this.currentPokemonData['evolution']) this.loadPokemonSpriteForEvolution(this.currentPokemonData['evolution'][0][1], 1);
+    if (this.currentPokemonData['evolution']) this.loadPokemonSpriteForEvolution(this.currentPokemonData['evolution'][0][2], 2);
   }
 
   loadMoves() {
@@ -49,8 +49,8 @@ export class DetailsComponent {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
-  currentPokemonIsNotDisplayedInEvolutions(pokemonEvolution: any) {
-    if (pokemonEvolution['name'] != this.currentPokemonData['name']) {
+  currentPokemonIsNotDisplayedInEvolutions(pokemonEvolution: string) {
+    if (pokemonEvolution != this.currentPokemonData['name']) {
       return true;
     } else {
       return false;
