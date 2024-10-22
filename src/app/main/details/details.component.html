@@ -1,4 +1,4 @@
-<section id="details" class="dp-none">
+<section id="details" class="dp-none {{ currentPokemonData['color'] }}">
     <div class="arrow">
         <img (click)="removeDetailsOverlay()" src="./assets/img/arrow-back.svg">
     </div>
@@ -53,17 +53,17 @@
         </div>
         <div *ngIf="menuNumber == 3" class="info-container evo-container">
             <div *ngIf="currentPokemonData['evolution'][0]['name'] != '' && currentPokemonIsNotDisplayedInEvolutions(currentPokemonData['evolution'][0])"
-                class="evo-picture-container">
+                class="evo-picture-container" (click)="setNewCurrentPokemon(currentPokemonData['evolution'][0]['name'])">
                 <img src="{{ evoImage1 }}">
                 <span>{{ currentPokemonData['evolution'][0]['name'] }}</span>
             </div>
             <div *ngIf="currentPokemonData['evolution'][1]['name'] != '' && currentPokemonIsNotDisplayedInEvolutions(currentPokemonData['evolution'][1])"
-                class="evo-picture-container">
+                class="evo-picture-container" (click)="setNewCurrentPokemon(currentPokemonData['evolution'][1]['name'])">
                 <img src="{{ evoImage2 }}">
                 <span>{{ currentPokemonData['evolution'][1]['name'] }}</span>
             </div>
             <div *ngIf="currentPokemonData['evolution'][2]['name'] != '' && currentPokemonIsNotDisplayedInEvolutions(currentPokemonData['evolution'][2])"
-                class="evo-picture-container">
+                class="evo-picture-container" (click)="setNewCurrentPokemon(currentPokemonData['evolution'][2]['name'])">
                 <img src="{{ evoImage3 }}">
                 <span>{{ currentPokemonData['evolution'][2]['name'] }}</span>
             </div>

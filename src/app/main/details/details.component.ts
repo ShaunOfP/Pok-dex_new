@@ -23,7 +23,6 @@ export class DetailsComponent {
 
   loadAbout() {
     this.menuNumber = 1;
-    console.log(this.currentPokemonData);
   }
 
   loadStats() {
@@ -74,6 +73,14 @@ export class DetailsComponent {
         }
       }
       return;
+    });
+  }
+
+  setNewCurrentPokemon(pokemonName: string) {
+    this.fullPokemonList.filter(singlePokemon => {
+      if (singlePokemon.name == pokemonName) {
+        this.currentPokemonData = singlePokemon;
+      }
     });
   }
 }

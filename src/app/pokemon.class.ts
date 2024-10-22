@@ -1,6 +1,7 @@
 export class Pokemon {
     public abilities: string = '';
     public base_experience: number = 0;
+    public color: string = '';
     public game_indices: string = '';
     public forms: string = '';
     public id: number = 0;

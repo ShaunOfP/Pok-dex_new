@@ -201,6 +201,46 @@ meter {
     display: none;
 }
 
+.green{
+    background-color: #41D168;
+}
+
+.black{
+    background-color: #272727;
+}
+
+.yellow{
+    background-color: #A8B820;
+}
+
+.white{
+    background-color: #FFFFFF;
+}
+
+.red{
+    background-color: #FA6555;
+}
+
+.blue{
+    background-color: #0055D4;
+}
+
+.purple{
+    background-color: #953594;
+}
+
+.pink{
+    background-color: #be3379;
+}
+
+.gray{
+    background-color: #919191;
+}
+
+.brown{
+    background-color: #9D9B6A;
+}
+
 @media (max-width: 400px) {
     .desktop-stats {
         display: none;

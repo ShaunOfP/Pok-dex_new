@@ -119,7 +119,7 @@ export class MainComponent implements OnInit {
   }
 
 
-  pushPokemonColorsIntoArray(){
+  pushPokemonColorsIntoArray() {
     for (let i = 0; i < 10; i++) {
       this.pokeapiService.getColorsOfPokemon().subscribe({
         next: (data) => {
@@ -177,11 +177,11 @@ export class MainComponent implements OnInit {
   }
 
 
-  getPokemonColor(pokemonName: string){
-      for (let i = 0; i < this.colorList.length; i++){
-        if (this.colorList[i]['pokemon_species'].includes(pokemonName)){
-          return this.colorList[i]['name'];
-        }
+  getPokemonColor(pokemonName: string) {
+    for (let i = 0; i < this.colorList.length; i++) {
+      if (this.colorList[i]['pokemon_species'].includes(pokemonName)) {
+        return this.colorList[i]['name'];
       }
+    }
   }
 }

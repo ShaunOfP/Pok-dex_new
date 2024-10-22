@@ -30,8 +30,8 @@ export class PokeapiService {
     return this.http.get(this.evoUrl + this.evoCounter);
   }
 
-  
-  getColorsOfPokemon(): Observable<any>{
+
+  getColorsOfPokemon(): Observable<any> {
     this.colorCounter++;
     return this.http.get(this.colorUrl + this.colorCounter);
   }
