@@ -5,6 +5,7 @@ import { CardComponent } from './components/card/card.component';
 import { CommonModule } from '@angular/common';
 import { DetailsComponent } from "./details/details.component";
 import { Pokemon } from '../pokemon.class';
+import { forkJoin, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-main',
@@ -16,6 +17,8 @@ import { Pokemon } from '../pokemon.class';
 })
 
 export class MainComponent implements OnInit {
+  requests: Observable<any>[] = [];
+  evoRequests: Observable<any>[] = [];
   colorList: Array<any> = [];
   fullPokemonInfoList: Array<any> = [];
   evolutionList: Array<any> = [];
@@ -32,64 +35,90 @@ export class MainComponent implements OnInit {
     this.pushPokemonColorsIntoArray();
     this.pushEvolutionListIntoArray();
     this.fillPokemonInfoList();
+    console.log(this.fullPokemonInfoList);
   }
 
 
   /**
-   * Last entry in API is 1025;
+   * 
    */
   fillPokemonInfoList() {
-    for (let i = 0; i < 1025; i++) {
-      this.pokeapiService.getPokemonInfoList().subscribe({
-        next: (data) => {
-          data = {
-            abilities: this.searchDataSubArrayForValues(data.abilities, 'ability', 'name'),
-            base_experience: data.base_experience,
-            game_indices: this.searchDataSubArrayForValues(data.game_indices, 'version', 'name'),
-            forms: this.searchDataSubArrayForValues(data.forms, '', 'name'),
-            id: data.id,
-            formattedId: this.formatNumber(data.id),
-            moves: this.searchDataSubArrayForValues(data.moves, 'move', 'name'),
-            name: this.capitalizeFirstLetter(data.name),
-            species: data.species,
-            sprites: data['sprites']['other']['official-artwork']['front_default'],
-            stats: data.stats,
-            types: this.searchDataSubArrayForValues(data.types, 'type', 'name'),
-            weight: data.weight,
-            evolution: this.sortEvolutionToPokemonData(this.capitalizeFirstLetter(data.name)),
-            color: this.getPokemonColor(this.capitalizeFirstLetter(data.name))
-          };
-          this.fullPokemonInfoList.push(data);
-        },
-        error: (error) => {
-          console.error('There was an error retrieving the Pokemon Data from the API!', error);
-        }
-      });
+    for (let i = 1; i <= 1025; i++) {
+      this.requests.push(this.pokeapiService.getPokemonInfoList(i));
     }
+
+    forkJoin(this.requests).subscribe({
+      next: (responses) => {
+        this.restructurePokeData(responses);
+      },
+      error: (err) => {
+        console.error('Failed to fetch some Pokémon data', err);
+      }
+    });
   }
 
 
   /**
-   * 541 because: last filled index on the api is 549, but we need to subtract 7 because we skip 7 empty entries in the getEvolutionInfoList-function in the pokeapi.service.ts
+   * 
+   * @param data 
+   */
+  restructurePokeData(data: Array<any>) {
+    data.forEach(pokemonData => {
+      this.fullPokemonInfoList.push({
+        abilities: this.searchDataSubArrayForValues(pokemonData.abilities, 'ability', 'name'),
+        base_experience: pokemonData.base_experience,
+        game_indices: this.searchDataSubArrayForValues(pokemonData.game_indices, 'version', 'name'),
+        forms: this.searchDataSubArrayForValues(pokemonData.forms, '', 'name'),
+        id: pokemonData.id,
+        formattedId: this.formatNumber(pokemonData.id),
+        moves: this.searchDataSubArrayForValues(pokemonData.moves, 'move', 'name'),
+        name: this.capitalizeFirstLetter(pokemonData.name),
+        species: pokemonData.species,
+        sprites: pokemonData['sprites']['other']['official-artwork']['front_default'],
+        stats: pokemonData.stats,
+        types: this.searchDataSubArrayForValues(pokemonData.types, 'type', 'name'),
+        weight: pokemonData.weight,
+        evolution: this.sortEvolutionToPokemonData(this.capitalizeFirstLetter(pokemonData.name)),
+        color: this.getPokemonColor(this.capitalizeFirstLetter(pokemonData.name))
+      });
+    });
+  }
+
+
+  /**
+   * 
    */
   pushEvolutionListIntoArray() {
-    for (let i = 0; i < 541; i++) {
-      this.pokeapiService.getEvolutionInfoList().subscribe({
-        next: (data) => {
-          if (data.chain['evolves_to'] == 0) {
-            data = [this.capitalizeFirstLetter(data.chain['species']['name']), "", ""];
-          } else if (data.chain['evolves_to'][0]['evolves_to'] == 0) {
-            data = [this.capitalizeFirstLetter(data.chain['species']['name']), this.capitalizeFirstLetter(data.chain['evolves_to'][0]['species']['name']), ""];
-          } else {
-            data = [this.capitalizeFirstLetter(data.chain['species']['name']), this.capitalizeFirstLetter(data.chain['evolves_to'][0]['species']['name']), this.capitalizeFirstLetter(data.chain['evolves_to'][0]['evolves_to'][0]['species']['name'])];
-          }
-          this.evolutionList.push(data);
-        },
-        error: (error) => {
-          console.error('There was an error retrieving the Evolution Data from the API!', error);
-        }
-      });
+    for (let i = 1; i <= 549; i++) {
+      if (i == 210 || i == 222 || i == 225 || i == 226 || i == 227 || i == 231 || i == 238 || i == 251) {
+        continue;
+      } else {
+        this.evoRequests.push(this.pokeapiService.getEvolutionInfoList(i));
+      }
     }
+
+    forkJoin(this.evoRequests).subscribe({
+      next: (responses) => {
+        this.restructureEvolutionData(responses);
+      },
+      error: (err) => {
+        console.error('Failed to fetch some Pokémon data', err);
+      }
+    });
+  }
+
+
+  restructureEvolutionData(data: Array<any>) {
+    data.forEach(evolutionData => {
+      if (evolutionData.chain['evolves_to'] == 0) {
+        data = [this.capitalizeFirstLetter(evolutionData.chain['species']['name']), "", ""];
+      } else if (evolutionData.chain['evolves_to'][0]['evolves_to'] == 0) {
+        data = [this.capitalizeFirstLetter(evolutionData.chain['species']['name']), this.capitalizeFirstLetter(evolutionData.chain['evolves_to'][0]['species']['name']), ""];
+      } else {
+        data = [this.capitalizeFirstLetter(evolutionData.chain['species']['name']), this.capitalizeFirstLetter(evolutionData.chain['evolves_to'][0]['species']['name']), this.capitalizeFirstLetter(evolutionData.chain['evolves_to'][0]['evolves_to'][0]['species']['name'])];
+      }
+      this.evolutionList.push(data);
+    });
   }
 
 
@@ -185,5 +214,15 @@ export class MainComponent implements OnInit {
         return this.colorList[i]['name'];
       }
     }
+
+    this.givePokemonColor();
+  }
+
+  givePokemonColor() {
+    this.fullPokemonInfoList.map(pokemon => {
+      if (pokemon.color == undefined || pokemon.color == "") {
+        pokemon.color = 'default';
+      }
+    });
   }
 }

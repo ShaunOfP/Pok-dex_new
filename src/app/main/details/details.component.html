@@ -52,17 +52,20 @@
             </table>
         </div>
         <div *ngIf="menuNumber == 3" class="info-container evo-container">
-            <div *ngIf="currentPokemonData['evolution'][0][0] != '' && currentPokemonIsNotDisplayedInEvolutions(currentPokemonData['evolution'][0][0])"
+            <div *ngIf="hasEvolution == 0" class="evo-picture-container">
+                <span>{{ currentPokemonData['evolution'] }}</span>
+            </div>
+            <div *ngIf="currentPokemonData['evolution'][0][0] != '' && currentPokemonIsNotDisplayedInEvolutions(currentPokemonData['evolution'][0][0]) && hasEvolution == 1"
                 class="evo-picture-container" (click)="setNewCurrentPokemon(currentPokemonData['evolution'][0][0])">
                 <img src="{{ evoImage1 }}">
                 <span>{{ currentPokemonData['evolution'][0][0] }}</span>
             </div>
-            <div *ngIf="currentPokemonData['evolution'][0][1] != '' && currentPokemonIsNotDisplayedInEvolutions(currentPokemonData['evolution'][0][1])"
+            <div *ngIf="currentPokemonData['evolution'][0][1] != '' && currentPokemonIsNotDisplayedInEvolutions(currentPokemonData['evolution'][0][1]) && hasEvolution == 1"
                 class="evo-picture-container" (click)="setNewCurrentPokemon(currentPokemonData['evolution'][0][1])">
                 <img src="{{ evoImage2 }}">
                 <span>{{ currentPokemonData['evolution'][0][1] }}</span>
             </div>
-            <div *ngIf="currentPokemonData['evolution'][0][2] != '' && currentPokemonIsNotDisplayedInEvolutions(currentPokemonData['evolution'][0][2])"
+            <div *ngIf="currentPokemonData['evolution'][0][2] != '' && currentPokemonIsNotDisplayedInEvolutions(currentPokemonData['evolution'][0][2]) && hasEvolution == 1"
                 class="evo-picture-container" (click)="setNewCurrentPokemon(currentPokemonData['evolution'][0][2])">
                 <img src="{{ evoImage3 }}">
                 <span>{{ currentPokemonData['evolution'][0][2] }}</span>

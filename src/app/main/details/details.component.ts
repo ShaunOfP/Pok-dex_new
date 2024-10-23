@@ -15,7 +15,7 @@ export class DetailsComponent {
   evoImage1: string = "";
   evoImage2: string = "";
   evoImage3: string = "";
-
+  hasEvolution: number = 1;
   menuNumber: number = 1;
 
   constructor() {
@@ -43,9 +43,15 @@ export class DetailsComponent {
    */
   loadEvo() {
     this.menuNumber = 3;
-    if (this.currentPokemonData['evolution']) this.loadPokemonSpriteForEvolution(this.currentPokemonData['evolution'][0][0], 0);
-    if (this.currentPokemonData['evolution']) this.loadPokemonSpriteForEvolution(this.currentPokemonData['evolution'][0][1], 1);
-    if (this.currentPokemonData['evolution']) this.loadPokemonSpriteForEvolution(this.currentPokemonData['evolution'][0][2], 2);
+    if (this.currentPokemonData['evolution'].length != 0) {
+      this.hasEvolution = 1;
+      this.loadPokemonSpriteForEvolution(this.currentPokemonData['evolution'][0][0], 0);
+      this.loadPokemonSpriteForEvolution(this.currentPokemonData['evolution'][0][1], 1);
+      this.loadPokemonSpriteForEvolution(this.currentPokemonData['evolution'][0][2], 2);
+    } else {
+      this.hasEvolution = 0;
+      this.currentPokemonData['evolution'] = ["This Pokemon does not evolve"];
+    }
   }
 
 

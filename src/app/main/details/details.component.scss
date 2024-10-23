@@ -36,6 +36,7 @@ section {
     padding-right: 50px;
     justify-content: space-between;
     font-weight: bold;
+    align-items: center;
 
     >:first-child {
         font-size: 32px;
@@ -243,12 +244,21 @@ meter {
     background-color: #9D9B6A;
 }
 
+.default{
+    background-color: lightblue;
+}
+
 @media (max-width: 500px) {
+    .arrow {
+        height: 25px;
+        width: 25px;
+        margin-top: 25px;
+        margin-left: 25px;
+    }
+
     .pokemon-image {
         max-height: 350px;
         max-width: 350px;
-        bottom: -10%;
-        // bottom: -55px;
     }
 }
 
