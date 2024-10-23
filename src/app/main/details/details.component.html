@@ -52,7 +52,7 @@
             </table>
         </div>
         <div *ngIf="menuNumber == 3" class="info-container evo-container">
-            <div *ngIf="hasEvolution == 0" class="evo-picture-container">
+            <div *ngIf="hasEvolution == 0 || currentPokemonData['evolution'] == ['This Pokemon does not evolve']" class="evo-picture-container">
                 <span>{{ currentPokemonData['evolution'] }}</span>
             </div>
             <div *ngIf="currentPokemonData['evolution'][0][0] != '' && currentPokemonIsNotDisplayedInEvolutions(currentPokemonData['evolution'][0][0]) && hasEvolution == 1"

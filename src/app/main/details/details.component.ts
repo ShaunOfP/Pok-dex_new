@@ -44,7 +44,6 @@ export class DetailsComponent {
   loadEvo() {
     this.menuNumber = 3;
     if (this.currentPokemonData['evolution'].length != 0) {
-      this.hasEvolution = 1;
       this.loadPokemonSpriteForEvolution(this.currentPokemonData['evolution'][0][0], 0);
       this.loadPokemonSpriteForEvolution(this.currentPokemonData['evolution'][0][1], 1);
       this.loadPokemonSpriteForEvolution(this.currentPokemonData['evolution'][0][2], 2);
@@ -68,6 +67,7 @@ export class DetailsComponent {
    */
   removeDetailsOverlay() {
     this.menuNumber = 1;
+    this.hasEvolution = 1;
     document.getElementById('details')?.classList.add('dp-none');
   }
 

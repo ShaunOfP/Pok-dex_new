@@ -35,7 +35,6 @@ export class MainComponent implements OnInit {
     this.pushPokemonColorsIntoArray();
     this.pushEvolutionListIntoArray();
     this.fillPokemonInfoList();
-    console.log(this.fullPokemonInfoList);
   }
 
 
@@ -111,7 +110,7 @@ export class MainComponent implements OnInit {
   restructureEvolutionData(data: Array<any>) {
     data.forEach(evolutionData => {
       if (evolutionData.chain['evolves_to'] == 0) {
-        data = [this.capitalizeFirstLetter(evolutionData.chain['species']['name']), "", ""];
+        data = ["This Pokemon does not evolve"];
       } else if (evolutionData.chain['evolves_to'][0]['evolves_to'] == 0) {
         data = [this.capitalizeFirstLetter(evolutionData.chain['species']['name']), this.capitalizeFirstLetter(evolutionData.chain['evolves_to'][0]['species']['name']), ""];
       } else {
