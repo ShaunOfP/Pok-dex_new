@@ -21,14 +21,26 @@ export class DetailsComponent {
   constructor() {
   }
 
+
+  /**
+   * Sets the menuNumber
+   */
   loadAbout() {
     this.menuNumber = 1;
   }
 
+
+  /**
+   * Sets the menuNumber
+   */
   loadStats() {
     this.menuNumber = 2;
   }
 
+
+  /**
+   * Sets the menuNumber and calls the function to load the Pokemon Evolution Pictures
+   */
   loadEvo() {
     this.menuNumber = 3;
     if (this.currentPokemonData['evolution']) this.loadPokemonSpriteForEvolution(this.currentPokemonData['evolution'][0][0], 0);
@@ -36,19 +48,39 @@ export class DetailsComponent {
     if (this.currentPokemonData['evolution']) this.loadPokemonSpriteForEvolution(this.currentPokemonData['evolution'][0][2], 2);
   }
 
+
+  /**
+   * Sets the menuNumber
+   */
   loadMoves() {
     this.menuNumber = 4;
   }
 
+
+  /**
+   * Used to remove the Details Overlay and reset the menuNumber
+   */
   removeDetailsOverlay() {
     this.menuNumber = 1;
     document.getElementById('details')?.classList.add('dp-none');
   }
 
+
+  /**
+   * Takes in a string and returns the same string with its first letter capitalized
+   * @param string Provided string/word
+   * @returns String with first letter uppercase
+   */
   capitalizeFirstLetter(string: string): string {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
+
+  /**
+   * Checks for the currentPokemon in the evolution list
+   * @param pokemonEvolution A strin containin the name of the pokemon evolution
+   * @returns True or False
+   */
   currentPokemonIsNotDisplayedInEvolutions(pokemonEvolution: string) {
     if (pokemonEvolution != this.currentPokemonData['name']) {
       return true;
@@ -57,6 +89,12 @@ export class DetailsComponent {
     }
   }
 
+
+  /**
+   * Loads the imagepaths of the currentPokemon-evolutions into variables
+   * @param pokename String containing the name of a Pokemon
+   * @param id A number for switch case purpose only
+   */
   loadPokemonSpriteForEvolution(pokename: string, id: number) {
     this.fullPokemonList.find((pokemon) => {
       if (pokemon.name === pokename) {
@@ -76,6 +114,11 @@ export class DetailsComponent {
     });
   }
 
+
+  /**
+   * Overwrites the currentPokemonData variable to select a new currentPokemon; called when an evolution is clicked
+   * @param pokemonName Name of a Pokemon
+   */
   setNewCurrentPokemon(pokemonName: string) {
     this.fullPokemonList.filter(singlePokemon => {
       if (singlePokemon.name == pokemonName) {

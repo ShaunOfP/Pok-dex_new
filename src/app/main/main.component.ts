@@ -165,8 +165,8 @@ export class MainComponent implements OnInit {
 
 
   /**
-   * Überarbeiten weil zu oft aufgerufen
-   * @param evolutionData Data of the evolution chain
+   * Searches the evolution list for the provided pokemon name and returns the evolution array of this pokemon
+   * @param pokemonName Name of a Pokemon
    */
   sortEvolutionToPokemonData(pokemonName: string) {
     return this.evolutionList.filter(evo => evo.includes(pokemonName));
