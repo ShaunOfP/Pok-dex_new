@@ -123,12 +123,16 @@ section {
     text-align: left;
 }
 
+.text-center {
+    text-align: center;
+}
+
 .border-shadow {
     border-radius: 12px;
     box-shadow: 0px 1px 5px -1px rgba(102, 100, 102, 1);
 }
 
-.padding {
+.padding-5-20 {
     padding: 5px 20px 5px 20px;
 }
 
@@ -146,6 +150,10 @@ section {
 
 .gap-40 {
     gap: 40px;
+}
+
+.gap-25 {
+    gap: 25px
 }
 
 table {
@@ -166,7 +174,20 @@ table {
     gap: 5px;
 }
 
-.center {
+.appearance-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+    flex-direction: column;
+    height: 250px;
+}
+
+.margin-top-25 {
+    margin-top: 25px;
+}
+
+.align-center {
     align-items: center;
 }
 
@@ -265,6 +286,14 @@ meter {
 .relative-index-99 {
     position: relative;
     z-index: 99;
+}
+
+.row {
+    flex-direction: row;
+}
+
+.justify-center {
+    justify-content: center;
 }
 
 @media (max-width: 500px) {

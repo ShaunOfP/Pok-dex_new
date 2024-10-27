@@ -189,6 +189,7 @@ export class MainComponent implements OnInit {
   setCurrentPokemonData(pokemonData: Pokemon) {
     this.currentPokemonData = pokemonData;
     document.getElementById('details')?.classList.remove('dp-none');
+    document.body.style.overflow = "hidden";
   }
 
 

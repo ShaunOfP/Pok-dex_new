@@ -17,7 +17,7 @@
         </div>
         <div class="pokemon-image-container">
             <img *ngIf="currentPokemonData['sprites']" src="{{ currentPokemonData['sprites'] }}">
-        </div>        
+        </div>
     </div>
     <div class="lower-part">
         <nav class="lower-part-nav relative-index-99">
@@ -26,17 +26,34 @@
             <span (click)="loadEvo()">Evolution</span>
             <span (click)="loadMoves()">Moves</span>
         </nav>
-        <div *ngIf="menuNumber == 1" class="info-container center">
-            <div class="flex-column text-left border-shadow padding">
-                <span class="color-grey bold">Weight</span>
-                <span class="bold">{{ currentPokemonData['weight'] }}</span>
+        <div *ngIf="menuNumber == 1" class="info-container row justify-center gap-40">
+            <div>
+                <div class="flex text-center border-shadow padding-5-20 gap-25">
+                    <div class="flex-column">
+                        <span class="color-grey bold">Weight</span>
+                        <span class="bold">{{ currentPokemonData['weight'] }}</span>
+                    </div>
+                    <div class="flex-column">
+                        <span class="color-grey bold">Base Exp</span>
+                        <span class="bold">{{ currentPokemonData['base_experience'] }}</span>
+                    </div>
+                </div>
+                <div class="margin-top-25">
+                    <span class="color-grey bold">Starting Abilities</span>
+                    <div class="flex-column text-left bold">
+                        <span *ngIf="currentPokemonData['abilities'][0]">{{ currentPokemonData['abilities'][0] }}</span>
+                        <span *ngIf="currentPokemonData['abilities'][1]">{{ currentPokemonData['abilities'][1] }}</span>
+                    </div>
+                </div>
             </div>
-            <div class="flex gap-40">
-                <span class="color-grey bold">Base Exp</span>
-                <span class="bold">{{ currentPokemonData['base_experience'] }}</span>
+            <div class="bold">
+                <span class="color-grey">Appearances</span>
+                <div class="appearance-container">
+                    <span *ngFor="let game of currentPokemonData['game_indices']" class="flex-column">{{ game }}</span>
+                </div>
             </div>
         </div>
-        <div *ngIf="menuNumber == 2" class="info-container center">
+        <div *ngIf="menuNumber == 2" class="info-container align-center">
             <table>
                 @for (stat of currentPokemonData['stats']; track currentPokemonData.name; let i = $index){
                 <tr>
@@ -54,7 +71,8 @@
             </table>
         </div>
         <div *ngIf="menuNumber == 3" class="info-container evo-container">
-            <div *ngIf="hasEvolution == 0 || currentPokemonData['evolution'] == ['This Pokemon does not evolve']" class="evo-picture-container">
+            <div *ngIf="hasEvolution == 0 || currentPokemonData['evolution'] == ['This Pokemon does not evolve']"
+                class="evo-picture-container">
                 <span>{{ currentPokemonData['evolution'] }}</span>
             </div>
             <div *ngIf="currentPokemonData['evolution'][0][0] != '' && currentPokemonIsNotDisplayedInEvolutions(currentPokemonData['evolution'][0][0]) && hasEvolution == 1"

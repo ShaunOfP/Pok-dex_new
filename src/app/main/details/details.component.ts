@@ -27,6 +27,7 @@ export class DetailsComponent {
    */
   loadAbout() {
     this.menuNumber = 1;
+    console.log(this.currentPokemonData);
   }
 
 
@@ -69,6 +70,7 @@ export class DetailsComponent {
     this.menuNumber = 1;
     this.hasEvolution = 1;
     document.getElementById('details')?.classList.add('dp-none');
+    document.body.style.overflow = "visible";
   }
 
 
