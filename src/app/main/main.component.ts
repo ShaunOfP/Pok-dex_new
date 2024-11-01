@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { DetailsComponent } from "./details/details.component";
 import { Pokemon } from '../pokemon.class';
 import { forkJoin, Observable } from 'rxjs';
+import { from } from 'rxjs';
+import { mergeMap, toArray } from 'rxjs/operators';
 
 @Component({
   selector: 'app-main',
@@ -46,7 +48,10 @@ export class MainComponent implements OnInit {
       this.requests.push(this.pokeapiService.getPokemonInfoList(i));
     }
 
-    forkJoin(this.requests).subscribe({
+    from(this.requests).pipe(
+      mergeMap(request => request, 5),
+      toArray()
+    ).subscribe({
       next: (responses) => {
         this.restructurePokeData(responses);
       },
@@ -96,12 +101,15 @@ export class MainComponent implements OnInit {
       }
     }
 
-    forkJoin(this.evoRequests).subscribe({
+    from(this.evoRequests).pipe(
+      mergeMap(request => request, 100),
+      toArray()
+    ).subscribe({
       next: (responses) => {
         this.restructureEvolutionData(responses);
       },
       error: (err) => {
-        console.error('Failed to fetch some Pokémon data', err);
+        console.error("Failed to fetch some Evolution data", err);
       }
     });
   }
