@@ -5,7 +5,7 @@ import { CardComponent } from './components/card/card.component';
 import { CommonModule } from '@angular/common';
 import { DetailsComponent } from "./details/details.component";
 import { Pokemon } from '../pokemon.class';
-import { forkJoin, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { from } from 'rxjs';
 import { mergeMap, toArray } from 'rxjs/operators';
 
@@ -41,7 +41,7 @@ export class MainComponent implements OnInit {
 
 
   /**
-   * 
+   * Pushes requests into array, handles response from the requests
    */
   fillPokemonInfoList() {
     for (let i = 1; i <= 1025; i++) {
@@ -63,8 +63,8 @@ export class MainComponent implements OnInit {
 
 
   /**
-   * 
-   * @param data 
+   * Restructuring the Data from the API to make it easier to use later
+   * @param data JSON with all the pokemon info from the pokeAPI
    */
   restructurePokeData(data: Array<any>) {
     data.forEach(pokemonData => {
@@ -90,7 +90,7 @@ export class MainComponent implements OnInit {
 
 
   /**
-   * 
+   * Pushes requests into array. Skips empty entries. Handles response from the requests
    */
   pushEvolutionListIntoArray() {
     for (let i = 1; i <= 549; i++) {
@@ -102,7 +102,7 @@ export class MainComponent implements OnInit {
     }
 
     from(this.evoRequests).pipe(
-      mergeMap(request => request, 100),
+      mergeMap(request => request, 5),
       toArray()
     ).subscribe({
       next: (responses) => {
@@ -115,6 +115,10 @@ export class MainComponent implements OnInit {
   }
 
 
+  /**
+   * Restructures the Evolution Data for easier use and pushes it into an array
+   * @param data JSON containing the evolution Data from the PokeAPI
+   */
   restructureEvolutionData(data: Array<any>) {
     data.forEach(evolutionData => {
       if (evolutionData.chain['evolves_to'] == 0) {
@@ -226,6 +230,10 @@ export class MainComponent implements OnInit {
     this.givePokemonColor();
   }
 
+
+  /**
+   * Looks for empty entries in the Pokemon Array and sets a default color
+   */
   givePokemonColor() {
     this.fullPokemonInfoList.map(pokemon => {
       if (pokemon.color == undefined || pokemon.color == "") {
