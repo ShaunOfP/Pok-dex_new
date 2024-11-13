@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { PokeapiService } from '../pokeapi.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CardComponent } from './components/card/card.component';
@@ -18,13 +18,14 @@ import { mergeMap, toArray } from 'rxjs/operators';
   styleUrl: './main.component.scss'
 })
 
-export class MainComponent implements OnInit {
+export class MainComponent implements OnInit, AfterViewInit {
   requests: Observable<any>[] = [];
   evoRequests: Observable<any>[] = [];
   colorList: Array<any> = [];
   fullPokemonInfoList: Array<any> = [];
   evolutionList: Array<any> = [];
   currentPokemonData: Pokemon = new Pokemon();
+  showLoader: Boolean = true;
 
   constructor(private pokeapiService: PokeapiService) {
   }
@@ -37,6 +38,36 @@ export class MainComponent implements OnInit {
     this.pushPokemonColorsIntoArray();
     this.pushEvolutionListIntoArray();
     this.fillPokemonInfoList();
+  }
+
+
+  ngAfterViewInit(): void {
+    this.loadingDotsAnimation();
+  }
+
+
+  loadingDotsAnimation() {
+    try {
+      let container = document.getElementById("loadingDots") as HTMLSpanElement;
+      container.innerHTML = ``;
+      for (let i = 1; i <= 3; i++) {
+        setTimeout(() => {
+          container.innerHTML += `.`;
+        }, i * 1000);
+      }
+
+      setTimeout(() => {
+        container.innerHTML = ``;
+        this.loadingDotsAnimation();
+      }, 4000);
+    } catch (e) {
+
+    }
+  }
+
+
+  disableLoadingAnimation() {
+    this.showLoader = false;
   }
 
 
@@ -54,6 +85,7 @@ export class MainComponent implements OnInit {
     ).subscribe({
       next: (responses) => {
         this.restructurePokeData(responses);
+        this.disableLoadingAnimation();
       },
       error: (err) => {
         console.error('Failed to fetch some Pokémon data', err);

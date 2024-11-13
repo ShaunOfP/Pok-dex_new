@@ -119,10 +119,6 @@ section {
     flex-direction: column;
 }
 
-.text-left {
-    text-align: left;
-}
-
 .text-center {
     text-align: center;
 }
@@ -305,6 +301,8 @@ meter {
     .about-container{
         flex-direction: column;
         align-items: center;
+        padding-top: 65px;
+        height: 100%;
     }
 }
 
