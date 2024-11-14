@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, HostListener } from '@angular/core';
 import { Pokemon } from '../../pokemon.class';
 
 @Component({
@@ -17,8 +17,51 @@ export class DetailsComponent {
   evoImage3: string = "";
   hasEvolution: number = 1;
   menuNumber: number = 1;
+  isResizing: Boolean = false;
+  startY: number = 0;
+  initialHeight: number = 250;
 
   constructor() {
+  }
+
+
+  /**
+   * Initializes the start of the touch event by tracking, where the touch happened and enabling further resizing
+   * @param event The Touchevent "Touchstart"
+   */
+  onTouchStart(event: TouchEvent) {
+    this.isResizing = true;
+    this.startY = event.touches[0].clientY;
+  }
+
+
+  /**
+   * Calculates the new Height of the touched Element. If it is in a certain range it sets the new Height for the touched Element
+   * @param event The Touchevent "Touchmove"
+   * @returns nothing when resizing is not enabled
+   */
+  onTouchMove(event: TouchEvent) {
+    if (!this.isResizing) return;
+
+    const touchY = event.touches[0].clientY;
+    const newHeight = this.initialHeight + (this.startY - touchY);
+
+    if (newHeight >= 250 && newHeight <= 600) {
+      const container = document.getElementById('lowerContainer') as HTMLElement;
+      container.style.height = `${newHeight}px`;
+    }
+  }
+
+
+  /**
+   * When the touch ends and the resizing is enabled: Disables the resizing and set the initial Height to the current Height
+   */
+  @HostListener('document:touchend')
+  onTouchEnd() {
+    if (this.isResizing) {
+      this.isResizing = false;
+      this.initialHeight = parseInt((document.getElementById('lowerContainer') as HTMLElement).style.height, 10);
+    }
   }
 
 

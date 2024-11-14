@@ -19,7 +19,7 @@
             <img *ngIf="currentPokemonData['sprites']" src="{{ currentPokemonData['sprites'] }}">
         </div>
     </div>
-    <div class="lower-part">
+    <div id="lowerContainer" class="lower-part" (touchstart)="onTouchStart($event)" (touchmove)="onTouchMove($event)">
         <nav class="lower-part-nav relative-index-99">
             <span (click)="loadAbout()">About</span>
             <span (click)="loadStats()">Base Stats</span>

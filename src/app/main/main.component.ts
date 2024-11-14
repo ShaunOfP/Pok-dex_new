@@ -41,11 +41,17 @@ export class MainComponent implements OnInit, AfterViewInit {
   }
 
 
+  /**
+   * Executes function after the HTML is loaded
+   */
   ngAfterViewInit(): void {
     this.loadingDotsAnimation();
   }
 
 
+  /**
+   * Animates the dots to show loadin progress
+   */
   loadingDotsAnimation() {
     try {
       let container = document.getElementById("loadingDots") as HTMLSpanElement;
@@ -66,6 +72,9 @@ export class MainComponent implements OnInit, AfterViewInit {
   }
 
 
+  /**
+   * Changes the value of a variable to hide/show the Loading Animation/Pokedex Cards
+   */
   disableLoadingAnimation() {
     this.showLoader = false;
   }
