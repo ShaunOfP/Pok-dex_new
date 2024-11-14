@@ -224,6 +224,10 @@ export class MainComponent implements OnInit, AfterViewInit {
    * @returns a string with its first letter capitalized
    */
   searchDataSubArrayForValues(array: string[], searchValue1: string, searchValue2: string) {
+    if (array.length == 0){
+      return ["No Data provided"];
+    }
+    
     return array.map((item: any) => {
       if (searchValue1 == '' || searchValue1 == null) {
         return item[searchValue2] = this.capitalizeFirstLetter(item[searchValue2]);

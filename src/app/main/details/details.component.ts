@@ -70,7 +70,6 @@ export class DetailsComponent {
    */
   loadAbout() {
     this.menuNumber = 1;
-    console.log(this.currentPokemonData);
   }
 
 
