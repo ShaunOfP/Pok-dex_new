@@ -34,3 +34,20 @@ app-card {
     display: flex;
     margin-bottom: 10px;
 }
+
+.rotate-message {
+    position: absolute;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    font-size: 23px;
+    z-index: 999;
+    background-color: grey;
+}
+
+@media (max-width: 1000px) and (orientation: landscape) {
+    .rotate-message {
+        display: flex;
+    }
+}
