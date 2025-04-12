@@ -1,10 +1,13 @@
 <section>
-    <h1>Pokédex</h1>
+    <header>
+        <h1>Pokédex</h1>
+        <input class="searchbar" type="text" [(ngModel)]="searchTerm" (ngModelChange)="handleSearchInput()">
+    </header>    
     <div *ngIf="showLoader" class="loading-animation">
         Loading Data from Api <span id="loadingDots"></span>
     </div>
     <div id="cardContainer" *ngIf="!showLoader">
-        <app-card *ngFor="let pokemon of fullPokemonInfoList;" [pokeInfo]="pokemon" (click)="setCurrentPokemonData(pokemon)"></app-card>
+        <app-card *ngFor="let pokemon of filteredPokemonList;" [pokeInfo]="pokemon" (click)="setCurrentPokemonData(pokemon)"></app-card>
     </div>
     <app-details *ngIf="currentPokemonData" [currentPokemonData]="currentPokemonData" [fullPokemonList]="fullPokemonInfoList"></app-details>
 </section>

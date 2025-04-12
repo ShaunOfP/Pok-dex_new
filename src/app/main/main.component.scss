@@ -24,8 +24,23 @@ section {
     }
 }
 
-h1 {
-    color: black;
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 15px;
+    background-color: #ebebc6;
+    margin-bottom: 20px;
+
+    >h1 {
+        color: black;
+    }
+
+    >input {
+        height: fit-content;
+        font-size: 18px;
+        max-width: 150px;
+    }
 }
 
 app-card {

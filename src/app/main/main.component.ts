@@ -8,11 +8,12 @@ import { Pokemon } from '../pokemon.class';
 import { Observable } from 'rxjs';
 import { from } from 'rxjs';
 import { mergeMap, toArray } from 'rxjs/operators';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [HttpClientModule, CardComponent, CommonModule, DetailsComponent],
+  imports: [HttpClientModule, CardComponent, CommonModule, DetailsComponent, FormsModule],
   providers: [PokeapiService],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
@@ -23,6 +24,8 @@ export class MainComponent implements OnInit, AfterViewInit {
   evoRequests: Observable<any>[] = [];
   colorList: Array<any> = [];
   fullPokemonInfoList: Array<any> = [];
+  filteredPokemonList: Array<any> = [];
+  searchTerm: string = '';
   evolutionList: Array<any> = [];
   currentPokemonData: Pokemon = new Pokemon();
   showLoader: Boolean = true;
@@ -38,6 +41,7 @@ export class MainComponent implements OnInit, AfterViewInit {
     this.pushPokemonColorsIntoArray();
     this.pushEvolutionListIntoArray();
     this.fillPokemonInfoList();
+    this.handleSearchInput();
   }
 
 
@@ -127,6 +131,20 @@ export class MainComponent implements OnInit, AfterViewInit {
         color: this.getPokemonColor(this.capitalizeFirstLetter(pokemonData.name))
       });
     });
+  }
+
+
+  /**
+   * Loads the Data of the Pokemon either unfiltered or filtered via Search Term
+   */
+  handleSearchInput() {
+    if (this.searchTerm !== '') {
+      this.filteredPokemonList = this.fullPokemonInfoList.filter(pokemon =>
+        pokemon.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    } else {
+      this.filteredPokemonList = this.fullPokemonInfoList;
+    }
   }
 
 
@@ -224,10 +242,10 @@ export class MainComponent implements OnInit, AfterViewInit {
    * @returns a string with its first letter capitalized
    */
   searchDataSubArrayForValues(array: string[], searchValue1: string, searchValue2: string) {
-    if (array.length == 0){
+    if (array.length == 0) {
       return ["No Data provided"];
     }
-    
+
     return array.map((item: any) => {
       if (searchValue1 == '' || searchValue1 == null) {
         return item[searchValue2] = this.capitalizeFirstLetter(item[searchValue2]);
